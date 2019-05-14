@@ -66,9 +66,49 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     // text-align: center;
+    
+  }
+
+  body{
+    background-color: #edf2f7;
   }
   #nav {
     padding: 30px;
   }
 
- 
+  a{
+    text-decoration: none;
+  }
+
+  .a{
+    position: absolute;
+    width: 50rem;
+    z-index: 400;
+    bottom: 80px;
+    left: 250px;
+  }
+
+  .b{
+    position: absolute;
+    width: 45rem;
+    z-index: 300;
+    bottom: 60px;
+    left: 300px;
+  }
+
+  .c{
+    position: absolute;
+    width: 40rem;
+    z-index: 200;
+    bottom: 50px;
+    left: 350px;
+  }
+
+  .d{
+    position: absolute;
+    width: 35rem;
+    z-index: 100;
+    bottom: 40px;
+    left: 400px;
+    padding-top: 100px;
+  }
