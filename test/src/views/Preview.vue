@@ -1,9 +1,17 @@
 <template>
-  <ul v-if="any" class="list-reset">
-    <sequential-entrance>
-      <Item v-for="item in items" :key="item.id" :class="type">
-        <router-link :to="{path: '/item/'+item.id }">
-          <div class="max-w-full rounded overflow-hidden shadow-lg bg-white my-5">
+  <div class="container mx-auto px-4 bg-gray-500">
+    <div class="flex flex-no-wrap">
+      <div class="my-auto p-4">
+        <router-link to="/">
+          <i class="fa fa-arrow-left"></i>
+        </router-link>
+      </div>
+
+      <div class="w-3/5 flex-none p-2 MenuPopover">
+        <sequential-entrance>
+          <div
+            class="max-w-full rounded overflow-hidden shadow-lg bg-white my-20 bounce-enter-active"
+          >
             <div class="px-6 py-4">
               <div class="flex h-24">
                 <div class="flex-1 px-4 py-2 m-2">
@@ -19,12 +27,12 @@
               <div class="flex h-24">
                 <div class="flex-1 px-4 py-2 m-2 text-left">
                   <p class="text-grey-dark text-xs pb-2">Invoice</p>
-                  <span class="text-blue-dark text-xl">{{item.invoice}}</span>
+                  <span class="text-blue-dark text-xl">{{invoice}}</span>
                 </div>
 
                 <div class="flex-1 px-4 py-2 m-2 text-right">
                   <p class="text-grey-dark text-xs pb-2">Total Amount</p>
-                  <span class="text-blue-dark text-xl">{{item.amount}}</span>
+                  <span class="text-blue-dark text-xl">{{id}}</span>
                 </div>
               </div>
 
@@ -53,66 +61,50 @@
               </div>
             </div>
           </div>
-        </router-link>
-      </Item>
-    </sequential-entrance>
-  </ul>
+        </sequential-entrance>
+      </div>
+
+      <div class="w-2/5 flex-none p-2">
+        <sequential-entrance>
+          <Buyer/>
+        </sequential-entrance>
+      </div>
+
+      <div class="w-2/5 flex-none p-2">
+        <sequential-entrance>
+          <Seller/>
+        </sequential-entrance>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {
-  name: "Listing",
+// @ is an alias to /src
+import Buyer from "@/components/Buyer.vue";
+import Seller from "@/components/Seller.vue";
 
-  components: {
-    Item: {
-      name: "Item",
-      render(createElement) {
-        return createElement("li", this.$slots.default);
-      }
-    }
-  },
+export default {
   props: {
-    items: {
-      type: Array,
-      default: () => []
-    },
-    itemKey: {
-      type: String,
-      default: () => "value"
-    },
-    type: {
-      type: String,
-      default: () => "item"
-    }
+    invoice: String,
+    amount: String
   },
   computed: {
-    any() {
-      return this.items.length > 0;
-    },
-    styling: function() {
-      return {
-        position: "absolute",
-        width: "50rem",
-        zIndex: "400",
-        bottom: "80px",
-        left: "250px"
-      };
+    invoice() {
+      let invoice = this.$route.params.invoice;
+      return invoice;
     }
+  },
+  name: "preview",
+  components: {
+    Buyer,
+    Seller
+  },
+  data() {
+    return {
+      invoice: " ",
+      amount: " "
+    };
   }
 };
 </script>
-
-<style scoped>
-.list-item {
-  display: inline-block;
-  margin-right: 10px;
-}
-.list-enter-active,
-.list-leave-active {
-  transition: all 1s;
-}
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
-}
-</style>

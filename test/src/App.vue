@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <Circle></Circle>
+
     <div id="nav" class="pb-38">
       <!-- <router-link to="/">Home</router-link>
       <router-link to="/details">Details</router-link>-->
@@ -9,8 +11,13 @@
 </template>
 
 <script>
+import { Circle } from "vue-loading-spinner";
+
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    Circle
+  }
 };
 </script>
 

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import Details from './views/Details.vue';
+import Preview from './views/Preview.vue';
 
 Vue.use(Router);
 
@@ -13,9 +13,10 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/item/:id',
-      name: 'item',
-      component: Details,
+      path: '/preview/:id',
+      name: 'preview',
+      component: Preview,
+      props: true,
     },
   ],
 });
