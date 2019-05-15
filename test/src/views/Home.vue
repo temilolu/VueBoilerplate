@@ -5,7 +5,7 @@
       <div class="flex-auto">
         <sequential-entrance>
           <div v-for="item in invoices" :key="item.id">
-            <router-link :to="{path: '/preview/' + item.id }">
+            <router-link :to="{ name: 'preview', params: { id: item.id }}">
               <div class="max-w-full rounded overflow-hidden shadow-lg bg-white my-5">
                 <div class="px-6 py-4">
                   <div class="flex h-24">
@@ -68,22 +68,20 @@
 <script>
 // @ is an alias to /src
 // import Listing from "@/components/Listing.vue";
+import axios from "axios";
 
 export default {
   name: "home",
-  props: {
-    invoice: String,
-    amount: String
-  },
   data() {
     return {
-      invoices: [
-        { invoice: "H3110017", amount: "£204", id: 1 },
-        { invoice: "H3110018", amount: "£205", id: 2 },
-        { invoice: "H3110019", amount: "£2041", id: 3 },
-        { invoice: "H31100177", amount: "£104", id: 4 }
-      ]
+      invoices: []
     };
+  },
+  mounted: function() {
+    axios.get(" http://localhost:3000/invoices").then(result => {
+      console.log(result);
+      this.invoices = result.data;
+    });
   }
 };
 </script>

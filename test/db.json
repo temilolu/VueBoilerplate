@@ -1,0 +1,8 @@
+{
+	"invoices": [
+		{ "invoice": "H3110017", "amount": "£204", "id": 1 },
+		{ "invoice": "H3110018", "amount": "£205", "id": 2 },
+		{ "invoice": "H3110019", "amount": "£2041", "id": 3 },
+		{ "invoice": "H31100177", "amount": "£104", "id": 4 }
+	]
+}
