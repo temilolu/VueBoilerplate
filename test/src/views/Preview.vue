@@ -32,7 +32,7 @@
 
                 <div class="flex-1 px-4 py-2 m-2 text-right">
                   <p class="text-grey-dark text-xs pb-2">Total Amount</p>
-                  <span class="text-blue-dark text-xl">{{id}}</span>
+                  <span class="text-blue-dark text-xl">{{amount}}</span>
                 </div>
               </div>
 
@@ -81,20 +81,11 @@
 
 <script>
 // @ is an alias to /src
+import axios from "axios";
 import Buyer from "@/components/Buyer.vue";
 import Seller from "@/components/Seller.vue";
 
 export default {
-  props: {
-    invoice: String,
-    amount: String
-  },
-  computed: {
-    invoice() {
-      let invoice = this.$route.params.invoice;
-      return invoice;
-    }
-  },
   name: "preview",
   components: {
     Buyer,
@@ -105,6 +96,15 @@ export default {
       invoice: " ",
       amount: " "
     };
+  },
+  mounted: function() {
+    // now we get all the related infomation for the particular item id
+    axios
+      .get(`http://localhost:3000/invoices/${this.$route.params.id}`)
+      .then(res => {
+        this.invoice = res.data.invoice;
+        this.amount = res.data.amount;
+      });
   }
 };
 </script>
